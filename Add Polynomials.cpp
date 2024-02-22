@@ -2,15 +2,15 @@
 using namespace std;
 
 class Node{
-public:
-    int coeff;
-    int exp;
-    Node *next;
-    Node(int c,int e){
-        coeff = c;
-        exp = e;
-        next = nullptr;
-    }
+    public:
+        int coeff;
+        int exp;
+        Node *next;
+        Node(int c,int e){
+            coeff = c;
+            exp = e;
+            next = nullptr;
+        }
 };
 
 class Polynomial{
@@ -26,7 +26,7 @@ class Polynomial{
 
 Node* Polynomial :: insert(Node* head ,int c,int e){
     Node* newnode = new Node(c,e);
-    if(!head || head->exp < e){
+    if(!head || e > head->exp){
         // insert at head
         newnode->next = head;
         head = newnode;
@@ -36,6 +36,7 @@ Node* Polynomial :: insert(Node* head ,int c,int e){
         while(temp->next && e <= temp->next->exp){
             temp = temp->next;
         }
+        // insert newnode after temp
         newnode->next = temp->next;
         temp->next = newnode;
     }
@@ -63,8 +64,8 @@ void Polynomial :: print(Node* head){
             cout << temp->coeff << "x^" << temp->exp ;
             temp = temp->next;
             if(temp) cout << " + " ;
-            else cout << endl;
         }
+        // atlast print constant term
         cout << temp->coeff << endl;    
     }
 }
@@ -112,7 +113,6 @@ int main(){
     Node* head1 = nullptr;
     Node* head2 = nullptr;
 
-
     Polynomial p1, p2,p3;
 
     cout << "Enter polynomial 1: " << endl;
@@ -130,6 +130,7 @@ int main(){
     Node* resHead = p1.polyAdd(head1, head2);
     cout << "Resultant Polynomial : ";
     p3.print(resHead);
+
 
     return 0;
 }
