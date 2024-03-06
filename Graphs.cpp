@@ -32,7 +32,7 @@ void Graph::addEdge(int n1, int n2) {
     adjList[n1].push_back(n2);
     adjList[n2].push_back(n1);
 }
-void Graph :: printBFS(){
+void Graph :: printDFS(){
     // Initialise all false array
     cout << "Depth First Search (DFS) : ";
     bool visited[size] = {false};
@@ -64,7 +64,7 @@ void Graph :: printBFS(){
 
 
 
-void Graph :: printDFS(){
+void Graph :: printBFS(){
 
     // Initialise all false array
     cout << "Breadth First Search (BFS) : ";
